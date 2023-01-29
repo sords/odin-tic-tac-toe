@@ -1,47 +1,38 @@
-function game(name,marker) {
-    const gameboard = ['x','0'];
-    const boxclick = document.querySelectorAll('.box')
-    const gameplayers = {
-        name : name,
-        marker : marker
-    }
-    function swap(){
-       turner = turner ? false : true
+const boxclick = document.querySelectorAll('.box');
+currentplayer = 'X';
+gameover = false
 
-    }
-    function render() {
-        boxclick.forEach((button) => {
-            button.addEventListener('click',()=>{
-                button.textContent = marker
-            })
-            swap()
-        })
-    }
-    function play() {
 
-        render()
-    }
-    return {
-        gameplayers,play
-    }
+function render() {
+    boxclick.forEach((box) => {
+        box.addEventListener('click', () => {
+            box.textContent = currentplayer;
+            getmarker();
+            console.log(recordmoves(box))
+        });
+    });
 }
 
-let turner = true;
-
-const player1 = game('sampath', '0');
-const player2 = game('alex','c')
-
-if(turner){
-    player1.play()
-} else {
-    player2.play()
+function getmarker() {
+        if ( currentplayer === 'X') {
+            currentplayer = 'O';
+        } else {
+            currentplayer = 'X';
+        }
+        return
 }
 
-console.log(player1,player2)
-// const boxclick = document.querySelectorAll('.box')
-
-// boxclick.forEach((button) => {
-//     button.addEventListener('click',()=>{
-//         button.textContent = 'X'
-//     })
-// })
+function recordmoves(box) {
+    // for(let i = 0; i < 9 ; i++) {
+    //     if ( m % 2 === 0) {
+    //         m += 1
+    //         return 'O';
+    //     } else {
+    //         m += 1
+    //         return 'X';
+    //     }
+    // }
+    return box.id
+}
+render()
+// let board = document.querySelector('.board')
